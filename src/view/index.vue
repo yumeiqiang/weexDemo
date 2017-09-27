@@ -88,12 +88,14 @@
     </div>
     <div class="full" v-if='full'></div>
     <div class="loading" v-if='load'>
-      <text class="box">加载中....</text>
+      <text class="box">正在为你加载</text>
     </div>
   </scroller>
 </template>
 
 <script>
+var modal = weex.requireModule('modal')
+var valueModel = weex.requireModule('weex_module')
 const start = new Date().setHours(0,0,0)
 const end = new Date().setHours(23,59,59)
 import { getList } from '../api/http.js'
@@ -102,11 +104,22 @@ import { getList } from '../api/http.js'
         type: 1,
         info: undefined,
         load: false,
-        full: false
+        full: false,
+        kOpenId: undefined
     },
     created(){
+      var that= this;
+      valueModel.getOpenId(function(v){
+        that.kOpenId=v.openId;
+     });
+      modal.alert({
+        message: that.kOpenId,
+        duration: 3
+      }, function (value) {
+        console.log('alert callback', value)
+      })
       let firstData = {
-        kOpenId: 'r7509511504149365138806060',
+        kOpenId: this.kOpenId,
         startTime: start,
         endTime: end,
       }
@@ -120,7 +133,7 @@ import { getList } from '../api/http.js'
         switch (e){
           case 1:
           let dataFirst = {
-            kOpenId: 'r7509511504149365138806060',
+            kOpenId: this.kOpenId,
             startTime: start,
             endTime: end
           }
@@ -128,7 +141,7 @@ import { getList } from '../api/http.js'
           break;
           case 2:
           let data1 = {
-            kOpenId: 'r7509511504149365138806060',
+            kOpenId: this.kOpenId,
             startTime: start-24*60*60*1000,
             endTime: end-24*60*60*1000
           }
@@ -137,7 +150,7 @@ import { getList } from '../api/http.js'
           case 3:
           let day = new Date().getDay()
           let data2 = {
-            kOpenId: 'r7509511504149365138806060',
+            kOpenId: this.kOpenId,
             startTime: start-24*60*60*1000*day,
             endTime: end
           }
@@ -146,7 +159,7 @@ import { getList } from '../api/http.js'
           case 4:
           let day1 = new Date().getDate()
           let data3 = {
-            kOpenId: 'r7509511504149365138806060',
+            kOpenId: this.kOpenId,
             startTime: start-24*60*60*1000*day1,
             endTime: end
           }
@@ -174,11 +187,11 @@ import { getList } from '../api/http.js'
   width: 750px;height: 10000px;position: absolute;left: 0;top: 0;background-color: rgba(0,0,0,0.5)
 }
 .loading{
-  width: 200px;border-radius: 15px;
-  height: 200px;justify-content: center;flex-direction: row;position: absolute;left: 270px;top: 300px;align-items: center;background-color: rgba(0,0,0,0.5)
+  border-radius: 15px;
+  justify-content: center;flex-direction: row;position: absolute;left: 260px;top: 400px;align-items: center;background-color: rgba(0,0,0,0.5)
 }
 .box{
-color: #fff;
+color: #fff;padding-left: 30px; padding-right: 30px;padding-top: 30px;padding-bottom:30px
 }
   .wrapper {background-image: linear-gradient(to bottom,#58c7fa,#3c87f6);padding-bottom: 30px;position: relative;}
   .all_bg{
@@ -204,7 +217,7 @@ color: #fff;
     text-align: center;font-size: 28px;margin-bottom: 30px
   }
   .title_bar{
-    display: flex;flex-direction: row;justify-content: space-around;;margin-top: 50px
+    display: flex;flex-direction: row;justify-content: space-around;;margin-top: 50px;
   }
   .titles{
     font-size: 28px;color: #fff;text-align: center;width: 80px;border-bottom-width: 0;border-bottom-style: none;padding-bottom: 5px;

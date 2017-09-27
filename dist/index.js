@@ -171,6 +171,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+var modal = weex.requireModule('modal');
+var valueModel = weex.requireModule('weex_module');
 const start = new Date().setHours(0, 0, 0);
 const end = new Date().setHours(23, 59, 59);
 
@@ -179,11 +181,22 @@ const end = new Date().setHours(23, 59, 59);
     type: 1,
     info: undefined,
     load: false,
-    full: false
+    full: false,
+    kOpenId: undefined
   },
   created() {
+    var that = this;
+    valueModel.getOpenId(function (v) {
+      that.kOpenId = v.openId;
+    });
+    modal.alert({
+      message: that.kOpenId,
+      duration: 3
+    }, function (value) {
+      console.log('alert callback', value);
+    });
     let firstData = {
-      kOpenId: 'r7509511504149365138806060',
+      kOpenId: this.kOpenId,
       startTime: start,
       endTime: end
     };
@@ -197,7 +210,7 @@ const end = new Date().setHours(23, 59, 59);
       switch (e) {
         case 1:
           let dataFirst = {
-            kOpenId: 'r7509511504149365138806060',
+            kOpenId: this.kOpenId,
             startTime: start,
             endTime: end
           };
@@ -205,7 +218,7 @@ const end = new Date().setHours(23, 59, 59);
           break;
         case 2:
           let data1 = {
-            kOpenId: 'r7509511504149365138806060',
+            kOpenId: this.kOpenId,
             startTime: start - 24 * 60 * 60 * 1000,
             endTime: end - 24 * 60 * 60 * 1000
           };
@@ -214,7 +227,7 @@ const end = new Date().setHours(23, 59, 59);
         case 3:
           let day = new Date().getDay();
           let data2 = {
-            kOpenId: 'r7509511504149365138806060',
+            kOpenId: this.kOpenId,
             startTime: start - 24 * 60 * 60 * 1000 * day,
             endTime: end
           };
@@ -223,7 +236,7 @@ const end = new Date().setHours(23, 59, 59);
         case 4:
           let day1 = new Date().getDate();
           let data3 = {
-            kOpenId: 'r7509511504149365138806060',
+            kOpenId: this.kOpenId,
             startTime: start - 24 * 60 * 60 * 1000 * day1,
             endTime: end
           };
@@ -260,19 +273,21 @@ module.exports = {
     "backgroundColor": "rgba(0,0,0,0.5)"
   },
   "loading": {
-    "width": 200,
     "borderRadius": 15,
-    "height": 200,
     "justifyContent": "center",
     "flexDirection": "row",
     "position": "absolute",
-    "left": 270,
-    "top": 300,
+    "left": 260,
+    "top": 400,
     "alignItems": "center",
     "backgroundColor": "rgba(0,0,0,0.5)"
   },
   "box": {
-    "color": "#ffffff"
+    "color": "#ffffff",
+    "paddingLeft": 30,
+    "paddingRight": 30,
+    "paddingTop": 30,
+    "paddingBottom": 30
   },
   "wrapper": {
     "backgroundImage": "linear-gradient(to bottom,#58c7fa,#3c87f6)",
@@ -492,7 +507,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: ["loading"]
   }, [_c('text', {
     staticClass: ["box"]
-  }, [_vm._v("加载中....")])]) : _vm._e()])
+  }, [_vm._v("正在为你加载")])]) : _vm._e()])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["order_list"]
@@ -620,10 +635,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/Users/yumeiqiang/Desktop/Project/src/view/index.vue"
+__vue_options__.__file = "/Users/yumeiqiang/Desktop/weexDemo/src/view/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-85bc3614"
+__vue_options__._scopeId = "data-v-002bb101"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {

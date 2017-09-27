@@ -82,11 +82,11 @@ var Component = __webpack_require__(7)(
   /* template */
   __webpack_require__(8),
   /* scopeId */
-  "data-v-56586352",
+  "data-v-42921880",
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/yumeiqiang/Desktop/Project/src/view/index.vue"
+Component.options.__file = "/Users/yumeiqiang/Desktop/weexDemo/src/view/index.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -97,9 +97,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-56586352", Component.options)
+    hotAPI.createRecord("data-v-42921880", Component.options)
   } else {
-    hotAPI.reload("data-v-56586352", Component.options)
+    hotAPI.reload("data-v-42921880", Component.options)
   }
 })()}
 
@@ -209,6 +209,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+var modal = weex.requireModule('modal');
+var valueModel = weex.requireModule('weex_module');
 const start = new Date().setHours(0, 0, 0);
 const end = new Date().setHours(23, 59, 59);
 
@@ -217,11 +219,22 @@ const end = new Date().setHours(23, 59, 59);
     type: 1,
     info: undefined,
     load: false,
-    full: false
+    full: false,
+    kOpenId: undefined
   },
   created() {
+    var that = this;
+    valueModel.getOpenId(function (v) {
+      that.kOpenId = v.openId;
+    });
+    modal.alert({
+      message: that.kOpenId,
+      duration: 3
+    }, function (value) {
+      console.log('alert callback', value);
+    });
     let firstData = {
-      kOpenId: 'r7509511504149365138806060',
+      kOpenId: this.kOpenId,
       startTime: start,
       endTime: end
     };
@@ -235,7 +248,7 @@ const end = new Date().setHours(23, 59, 59);
       switch (e) {
         case 1:
           let dataFirst = {
-            kOpenId: 'r7509511504149365138806060',
+            kOpenId: this.kOpenId,
             startTime: start,
             endTime: end
           };
@@ -243,7 +256,7 @@ const end = new Date().setHours(23, 59, 59);
           break;
         case 2:
           let data1 = {
-            kOpenId: 'r7509511504149365138806060',
+            kOpenId: this.kOpenId,
             startTime: start - 24 * 60 * 60 * 1000,
             endTime: end - 24 * 60 * 60 * 1000
           };
@@ -252,7 +265,7 @@ const end = new Date().setHours(23, 59, 59);
         case 3:
           let day = new Date().getDay();
           let data2 = {
-            kOpenId: 'r7509511504149365138806060',
+            kOpenId: this.kOpenId,
             startTime: start - 24 * 60 * 60 * 1000 * day,
             endTime: end
           };
@@ -261,7 +274,7 @@ const end = new Date().setHours(23, 59, 59);
         case 4:
           let day1 = new Date().getDate();
           let data3 = {
-            kOpenId: 'r7509511504149365138806060',
+            kOpenId: this.kOpenId,
             startTime: start - 24 * 60 * 60 * 1000 * day1,
             endTime: end
           };
@@ -344,7 +357,7 @@ exports = module.exports = __webpack_require__(6)();
 
 
 // module
-exports.push([module.i, "\n.full[data-v-56586352]{\n  width: 750px;height: 10000px;position: absolute;left: 0;top: 0;background-color: rgba(0,0,0,0.5)\n}\n.loading[data-v-56586352]{\n  width: 200px;border-radius: 15px;\n  height: 200px;justify-content: center;flex-direction: row;position: absolute;left: 270px;top: 300px;align-items: center;background-color: rgba(0,0,0,0.5)\n}\n.box[data-v-56586352]{\ncolor: #fff;\n}\n.wrapper[data-v-56586352] {background-image: linear-gradient(to bottom,#58c7fa,#3c87f6);padding-bottom: 30px;position: relative;\n}\n.all_bg[data-v-56586352]{\n    margin-top: 40px;\n}\n.kk[data-v-56586352]{\n  height: 102px;width: 1px;\n}\n.order_type[data-v-56586352]{\n    color: #666;text-align: center;font-size: 24px;\n}\n.order_k[data-v-56586352]{\n    position: relative;left: 0;top: -250px;\n}\n.order[data-v-56586352]{\n  flex-direction: row;justify-content: space-around;align-items: center;margin-left: 15px;margin-right: 15px;\n}\n.bg[data-v-56586352]{height: 300px;width:auto;margin-left: 15px;margin-right: 15px;\n}\n.number[data-v-56586352]{\n    margin-top: 15px!important;font-size: 48px;\n}\n.send[data-v-56586352]{\n    text-align: center;font-size: 28px;margin-bottom: 30px\n}\n.title_bar[data-v-56586352]{\n    display: flex;flex-direction: row;justify-content: space-around;;margin-top: 50px\n}\n.titles[data-v-56586352]{\n    font-size: 28px;color: #fff;text-align: center;width: 80px;border-bottom-width: 0;border-bottom-style: none;padding-bottom: 5px;\n}\n.title[data-v-56586352]{\n    font-size: 28px;color: #fff;text-align: center;width: 80px;\n    border-bottom-width: 4px;border-bottom-style: solid;border-color: #fff;padding-bottom: 5px;\n}\n.bgs[data-v-56586352]{\n    position: relative;height: 350px;\n}\n.ab_re[data-v-56586352]{\n    position: relative;top: -250px;margin-left: 15px;margin-right: 15px;\n}\n", ""]);
+exports.push([module.i, "\n.full[data-v-42921880]{\n  width: 750px;height: 10000px;position: absolute;left: 0;top: 0;background-color: rgba(0,0,0,0.5)\n}\n.loading[data-v-42921880]{\n  border-radius: 15px;\n  justify-content: center;flex-direction: row;position: absolute;left: 260px;top: 400px;align-items: center;background-color: rgba(0,0,0,0.5)\n}\n.box[data-v-42921880]{\ncolor: #fff;padding-left: 30px; padding-right: 30px;padding-top: 30px;padding-bottom:30px\n}\n.wrapper[data-v-42921880] {background-image: linear-gradient(to bottom,#58c7fa,#3c87f6);padding-bottom: 30px;position: relative;\n}\n.all_bg[data-v-42921880]{\n    margin-top: 40px;\n}\n.kk[data-v-42921880]{\n  height: 102px;width: 1px;\n}\n.order_type[data-v-42921880]{\n    color: #666;text-align: center;font-size: 24px;\n}\n.order_k[data-v-42921880]{\n    position: relative;left: 0;top: -250px;\n}\n.order[data-v-42921880]{\n  flex-direction: row;justify-content: space-around;align-items: center;margin-left: 15px;margin-right: 15px;\n}\n.bg[data-v-42921880]{height: 300px;width:auto;margin-left: 15px;margin-right: 15px;\n}\n.number[data-v-42921880]{\n    margin-top: 15px!important;font-size: 48px;\n}\n.send[data-v-42921880]{\n    text-align: center;font-size: 28px;margin-bottom: 30px\n}\n.title_bar[data-v-42921880]{\n    display: flex;flex-direction: row;justify-content: space-around;;margin-top: 50px;\n}\n.titles[data-v-42921880]{\n    font-size: 28px;color: #fff;text-align: center;width: 80px;border-bottom-width: 0;border-bottom-style: none;padding-bottom: 5px;\n}\n.title[data-v-42921880]{\n    font-size: 28px;color: #fff;text-align: center;width: 80px;\n    border-bottom-width: 4px;border-bottom-style: solid;border-color: #fff;padding-bottom: 5px;\n}\n.bgs[data-v-42921880]{\n    position: relative;height: 350px;\n}\n.ab_re[data-v-42921880]{\n    position: relative;top: -250px;margin-left: 15px;margin-right: 15px;\n}\n", ""]);
 
 // exports
 
@@ -638,13 +651,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "loading"
   }, [_c('text', {
     staticClass: "box"
-  }, [_vm._v("加载中....")])]) : _vm._e()])
+  }, [_vm._v("正在为你加载")])]) : _vm._e()])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-56586352", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-42921880", module.exports)
   }
 }
 
@@ -659,13 +672,13 @@ var content = __webpack_require__(5);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(10)("c2815834", content, false);
+var update = __webpack_require__(10)("519e77e4", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-56586352&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-56586352&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-42921880&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-42921880&scoped=true!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
