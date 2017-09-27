@@ -111,19 +111,19 @@ import { getList } from '../api/http.js'
       var that= this;
       valueModel.getOpenId(function(v){
         that.kOpenId=v.openId;
+        modal.alert({
+          message: that.kOpenId,
+          duration: 3
+        }, function (value) {
+          console.log('alert callback', value)
+        })
+        let firstData = {
+          kOpenId: that.kOpenId,
+          startTime: start,
+          endTime: end,
+        }
+       that.getCount(firstData)
      });
-      modal.alert({
-        message: that.kOpenId,
-        duration: 3
-      }, function (value) {
-        console.log('alert callback', value)
-      })
-      let firstData = {
-        kOpenId: this.kOpenId,
-        startTime: start,
-        endTime: end,
-      }
-     this.getCount(firstData)
     },
     methods: {
       update: function (e) {
