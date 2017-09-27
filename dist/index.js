@@ -171,7 +171,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var modal = weex.requireModule('modal');
+// var modal = weex.requireModule('modal')
 var valueModel = weex.requireModule('weex_module');
 const start = new Date().setHours(0, 0, 0);
 const end = new Date().setHours(23, 59, 59);
@@ -186,21 +186,18 @@ const end = new Date().setHours(23, 59, 59);
   },
   created() {
     var that = this;
-    valueModel.getOpenId(function (v) {
-      that.kOpenId = v.openId;
-      modal.alert({
-        message: that.kOpenId,
-        duration: 3
-      }, function (value) {
-        console.log('alert callback', value);
+    let platform = weex.config.env.platform;
+    if (platform === 'Android') {
+      valueModel.getOpenId(function (v) {
+        that.kOpenId = v.openId;
+        let firstData = {
+          kOpenId: that.kOpenId,
+          startTime: start,
+          endTime: end
+        };
+        that.getCount(firstData);
       });
-      let firstData = {
-        kOpenId: that.kOpenId,
-        startTime: start,
-        endTime: end
-      };
-      that.getCount(firstData);
-    });
+    } else if (platform === 'iOS') {}
   },
   methods: {
     update: function (e) {
