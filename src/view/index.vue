@@ -110,21 +110,9 @@ import { getList } from '../api/http.js'
     created(){
       var that= this;
       var platform = weex.config.env.platform
-      modal.alert({
-          message: platform,
-          duration: 3
-        }, function (value) {
-          console.log('alert callback', value)
-        })
-      if(platform ==='Android'){
+      if(platform ==='android'){
         valueModel.getOpenId(function(v){
           that.kOpenId=v.openId;
-          modal.alert({
-            message: that.kOpenId,
-            duration: 3
-          }, function (value) {
-            console.log('alert callback', value)
-          })
           let firstData = {
             kOpenId: that.kOpenId,
             startTime: start,
