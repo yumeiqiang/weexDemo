@@ -109,7 +109,7 @@ import { getList } from '../api/http.js'
     },
     created(){
       var that= this;
-      var platform = weex.config.env.platform
+      var platform = weex.config.env.platform.toLowerCase()
       if(platform ==='android'){
         valueModel.getOpenId(function(v){
           that.kOpenId=v.openId;
@@ -120,7 +120,7 @@ import { getList } from '../api/http.js'
           }
          that.getCount(firstData)
        });
-     }else if(platform==='iOS'){
+     }else if(platform==='ios'){
 
      }
     },
@@ -216,14 +216,14 @@ color: #fff;padding-left: 30px; padding-right: 30px;padding-top: 30px;padding-bo
     text-align: center;font-size: 28px;margin-bottom: 30px
   }
   .title_bar{
-    display: flex;flex-direction: row;justify-content: space-around;;margin-top: 50px;
+    display: flex;flex-direction: row;justify-content: space-around;margin-top: 50px;
   }
   .titles{
-    font-size: 28px;color: #fff;text-align: center;width: 80px;border-bottom-width: 0;border-bottom-style: none;padding-bottom: 5px;
+    font-size: 28px;color: #fff;text-align: center;width: 80px;border-bottom-width: 0;border-bottom-style: none;padding-bottom: 10px;padding-left: 10px;padding-right: 10px;
   }
   .title{
     font-size: 28px;color: #fff;text-align: center;width: 80px;
-    border-bottom-width: 4px;border-bottom-style: solid;border-color: #fff;padding-bottom: 5px;
+    border-bottom-width: 4px;border-bottom-style: solid;border-color: #fff;padding-bottom: 10px;padding-left: 10px;padding-right: 10px;
   }
   .bgs{
     position: relative;height: 350px;

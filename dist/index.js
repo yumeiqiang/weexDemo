@@ -186,7 +186,7 @@ const end = new Date().setHours(23, 59, 59);
   },
   created() {
     var that = this;
-    var platform = weex.config.env.platform;
+    var platform = weex.config.env.platform.toLowerCase();
     if (platform === 'android') {
       valueModel.getOpenId(function (v) {
         that.kOpenId = v.openId;
@@ -197,7 +197,7 @@ const end = new Date().setHours(23, 59, 59);
         };
         that.getCount(firstData);
       });
-    } else if (platform === 'iOS') {}
+    } else if (platform === 'ios') {}
   },
   methods: {
     update: function (e) {
@@ -342,7 +342,9 @@ module.exports = {
     "width": 80,
     "borderBottomWidth": 0,
     "borderBottomStyle": "none",
-    "paddingBottom": 5
+    "paddingBottom": 10,
+    "paddingLeft": 10,
+    "paddingRight": 10
   },
   "title": {
     "fontSize": 28,
@@ -352,7 +354,9 @@ module.exports = {
     "borderBottomWidth": 4,
     "borderBottomStyle": "solid",
     "borderColor": "#ffffff",
-    "paddingBottom": 5
+    "paddingBottom": 10,
+    "paddingLeft": 10,
+    "paddingRight": 10
   },
   "bgs": {
     "position": "relative",
@@ -566,8 +570,8 @@ module.exports.render._withStripped = true
 /* 3 */
 /***/ (function(module, exports) {
 
-const API = 'https://t.keguanchina.xyz/'; // 测试地址
-// const API = 'https://on.keguanchina.xyz/'    // 正式地址
+// const API = 'https://t.keguanchina.xyz/'  // 测试地址
+const API = 'https://on.keguanchina.xyz/'; // 正式地址
 
 module.exports = {
     API
