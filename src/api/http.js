@@ -17,7 +17,7 @@ export function fetch (path) {
           headers: {
             validateRandomNumber: random,
             validateTimestamp: time,
-            Cookie: v.cookie,
+            cookie: v.cookie,
             validateToken: v.token,
             validateValue: md5((md5((random + time).toString()) + v.key))
           },
@@ -29,10 +29,9 @@ export function fetch (path) {
             reject(response)
           }
         }, () => {})
-      }
+      })
     })
- });
-}
+ }
 
 export function getList (data) {
   return fetch('statistics/rider/personal?kOpenId='+data.kOpenId+'&startTime='+data.startTime+'&endTime='+data.endTime)
