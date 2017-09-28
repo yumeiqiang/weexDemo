@@ -5,13 +5,11 @@ import { uuid, randomNum } from './util.js'
 import md5 from 'md5'
 import qs from 'qs'
 
-export function fetch (path,method,data) {
+export function fetch (path) {
   const random = randomNum()
   const time = new Date().getTime()
   valueModel.getOpenId(function(v){
     return new Promise((resolve, reject) => {
-      switch (method){
-        case 'GET':
         stream.fetch({
           method: 'GET',
           url: `${API}${path}`,
@@ -19,7 +17,7 @@ export function fetch (path,method,data) {
           headers: {
             validateRandomNumber: random,
             validateTimestamp: time,
-            cookie: v.cookie,
+            Cookie: v.cookie,
             validateToken: v.token,
             validateValue: md5((md5((random + time).toString()) + v.key))
           },
@@ -30,38 +28,12 @@ export function fetch (path,method,data) {
           else {
             reject(response)
           }
-        }, () => {});
-        break;
-      case 'POST':
-      stream.fetch({
-        method: 'POST',
-        url: `${API}${path}`,
-        type: 'json',
-        body: qs.stringify(data),
-        headers: {
-          validateRandomNumber: random,
-          validateTimestamp: time,
-          cookie: v.cookie,
-          validateToken: v.token,
-          validateValue: md5((md5((random + time).toString()) + v.key))
-        },
-      }, (response) => {
-        if (response.status == 200) {
-          resolve(response)
-        }
-        else {
-          reject(response)
-        }
-      }, () => {});
-      break;
+        }, () => {})
       }
     })
  });
 }
 
 export function getList (data) {
-  return fetch('statistics/rider/personal?kOpenId='+data.kOpenId+'&startTime='+data.startTime+'&endTime='+data.endTime,'GET')
-}
-export function setCode(data){
-  return fetch('security/secret/set','POST',data)
+  return fetch('statistics/rider/personal?kOpenId='+data.kOpenId+'&startTime='+data.startTime+'&endTime='+data.endTime)
 }

@@ -98,7 +98,7 @@ var modal = weex.requireModule('modal')
 var valueModel = weex.requireModule('weex_module')
 const start = new Date().setHours(0,0,0)
 const end = new Date().setHours(23,59,59)
-import { getList, setCode } from '../api/http.js'
+import { getList } from '../api/http.js'
   export default {
     data: {
         type: 1,
