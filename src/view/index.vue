@@ -94,7 +94,7 @@
 </template>
 
 <script>
-// var modal = weex.requireModule('modal')
+var modal = weex.requireModule('modal')
 var valueModel = weex.requireModule('weex_module')
 const start = new Date().setHours(0,0,0)
 const end = new Date().setHours(23,59,59)
@@ -109,10 +109,22 @@ import { getList } from '../api/http.js'
     },
     created(){
       var that= this;
-      let platform = weex.config.env.platform
+      var platform = weex.config.env.platform
       if(platform ==='Android'){
         valueModel.getOpenId(function(v){
+          modal.alert({
+              message: v.openId,
+              duration: 3
+            }, function (value) {
+              console.log('alert callback', value)
+            })
           that.kOpenId=v.openId;
+          modal.alert({
+            message: that.kOpenId,
+            duration: 3
+          }, function (value) {
+            console.log('alert callback', value)
+          })
           let firstData = {
             kOpenId: that.kOpenId,
             startTime: start,
