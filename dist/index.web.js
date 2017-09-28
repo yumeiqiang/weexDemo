@@ -224,7 +224,7 @@ const end = new Date().setHours(23, 59, 59);
   },
   created() {
     var that = this;
-    var platform = weex.config.env.platform.toLowerCase();
+    var platform = weex.config.env.platform;
     if (platform === 'android') {
       valueModel.getOpenId(function (v) {
         that.kOpenId = v.openId;
@@ -235,7 +235,7 @@ const end = new Date().setHours(23, 59, 59);
         };
         that.getCount(firstData);
       });
-    } else if (platform === 'ios') {}
+    } else if (platform === 'iOS') {}
   },
   methods: {
     update: function (e) {

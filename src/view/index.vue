@@ -109,7 +109,7 @@ import { getList } from '../api/http.js'
     },
     created(){
       var that= this;
-      var platform = weex.config.env.platform.toLowerCase()
+      var platform = weex.config.env.platform
       if(platform ==='android'){
         valueModel.getOpenId(function(v){
           that.kOpenId=v.openId;
@@ -120,7 +120,7 @@ import { getList } from '../api/http.js'
           }
          that.getCount(firstData)
        });
-     }else if(platform==='ios'){
+     }else if(platform==='iOS'){
 
      }
     },
