@@ -187,14 +187,14 @@ const end = new Date().setHours(23, 59, 59);
   created() {
     var that = this;
     var platform = weex.config.env.platform;
+    modal.alert({
+      message: platform,
+      duration: 3
+    }, function (value) {
+      console.log('alert callback', value);
+    });
     if (platform === 'Android') {
       valueModel.getOpenId(function (v) {
-        modal.alert({
-          message: v.openId,
-          duration: 3
-        }, function (value) {
-          console.log('alert callback', value);
-        });
         that.kOpenId = v.openId;
         modal.alert({
           message: that.kOpenId,
