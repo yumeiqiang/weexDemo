@@ -9,7 +9,6 @@ export function fetch (path,method,data) {
   const random = randomNum()
   const time = new Date().getTime()
   valueModel.getOpenId(function(v){
-    kOpenId=v.openId;
     return new Promise((resolve, reject) => {
       switch (method){
         case 'GET':

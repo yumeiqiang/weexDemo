@@ -338,7 +338,6 @@ function fetch(path, method, data) {
   const random = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_js__["a" /* randomNum */])();
   const time = new Date().getTime();
   valueModel.getOpenId(function (v) {
-    kOpenId = v.openId;
     return new Promise((resolve, reject) => {
       switch (method) {
         case 'GET':
