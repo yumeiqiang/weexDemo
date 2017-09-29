@@ -15,11 +15,11 @@ export function fetch (path,all) {
             url: `${API}${path}`,
             type: 'json',
             headers: {
-              validateRandomNumber: random,
-              validateTimestamp: time,
-              cookie: all.cookie,
-              validateToken: all.token,
-              validateValue: md5((md5((random + time).toString()) + all.key))
+              'validateRandomNumber': random,
+              'validateTimestamp': time,
+              'cookie': all.cookie,
+              'validateToken': all.token,
+              'validateValue': md5((md5((random + time).toString()) + all.key))
             },
           }, (response) => {
             if (response.status == 200) {
@@ -38,9 +38,15 @@ export function fetch (path,all) {
           method: 'GET',
           url: `${API}${path}`,
           type: 'json',
+          headers: {
+            'validateRandomNumber': random,
+            'validateTimestamp': time,
+            'validateToken': '257209a1531f4d15bdfecd0f96ad6dd0',
+            'validateValue': md5((md5((random + time).toString()) + '1a00e77b-38e1-4837-86db-0d04ac88fe51'))
+          },
         }, (response) => {
           if (response.status == 200) {
-            resolve(response.data)
+            resolve(response)
           }
           else {
             reject(response)

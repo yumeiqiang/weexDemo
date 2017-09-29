@@ -463,12 +463,6 @@ const end = new Date().setHours(23, 59, 59);
     var platform = weex.config.env.platform;
     if (platform === 'android') {
       valueModel.getOpenId(function (v) {
-        modal.alert({
-          message: v.cookie,
-          duration: 3
-        }, function (value) {
-          console.log('alert callback', value);
-        });
         that.listQuery = v;
         let firstData = {
           kOpenId: that.listQuery.openId,
@@ -479,7 +473,7 @@ const end = new Date().setHours(23, 59, 59);
       });
     } else if (platform === 'iOS') {} else {
       let firstData = {
-        kOpenId: 'r7509511504149365138806060',
+        kOpenId: 'r1291681504597762371279858',
         startTime: start,
         endTime: end
       };
@@ -530,14 +524,46 @@ const end = new Date().setHours(23, 59, 59);
     },
     getCount(param, info) {
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__api_http_js__["a" /* getList */])(param, info).then(res => {
-        if (res.status === 200) {
+        modal.alert({
+          message: res,
+          duration: 3
+        }, function (value) {
+          console.log('alert callback', value);
+        });
+        if (res.status === 200 && res.data) {
           this.load = false;
           this.full = false;
           this.info = res.data;
+        } else {
+          this.load = false;
+          this.full = false;
+          this.info = {
+            "doorstepSend": {
+              "grabed": 0,
+              "waitMail": 0,
+              "cancelled": 0
+            },
+            "waybill": {
+              "waitSigned": 0,
+              "signed": 0,
+              "signException": 0,
+              "waitPickup": 0
+            },
+            "siteSend": {
+              "grabed": 0,
+              "cancelled": 0
+            }
+          };
         }
       }).catch(err => {
         this.load = false;
         this.full = false;
+        modal.alert({
+          message: err + '1',
+          duration: 3
+        }, function (value) {
+          console.log('alert callback', value);
+        });
       });
     }
   }
@@ -857,8 +883,8 @@ module.exports.render._withStripped = true
 /* 6 */
 /***/ (function(module, exports) {
 
-const API = 'https://t.keguanchina.xyz/'; // 测试地址
-// const API = 'https://on.keguanchina.xyz/'    // 正式地址
+// const API = 'https://t.keguanchina.xyz/'  // 测试地址
+const API = 'https://on.keguanchina.xyz/'; // 正式地址
 
 module.exports = {
     API
@@ -895,11 +921,11 @@ function fetch(path, all) {
         url: `${__WEBPACK_IMPORTED_MODULE_0__constant_js__["API"]}${path}`,
         type: 'json',
         headers: {
-          validateRandomNumber: random,
-          validateTimestamp: time,
-          cookie: all.cookie,
-          validateToken: all.token,
-          validateValue: __WEBPACK_IMPORTED_MODULE_2_md5___default()(__WEBPACK_IMPORTED_MODULE_2_md5___default()((random + time).toString()) + all.key)
+          'validateRandomNumber': random,
+          'validateTimestamp': time,
+          'cookie': all.cookie,
+          'validateToken': all.token,
+          'validateValue': __WEBPACK_IMPORTED_MODULE_2_md5___default()(__WEBPACK_IMPORTED_MODULE_2_md5___default()((random + time).toString()) + all.key)
         }
       }, response => {
         if (response.status == 200) {
@@ -914,10 +940,16 @@ function fetch(path, all) {
       stream.fetch({
         method: 'GET',
         url: `${__WEBPACK_IMPORTED_MODULE_0__constant_js__["API"]}${path}`,
-        type: 'json'
+        type: 'json',
+        headers: {
+          'validateRandomNumber': random,
+          'validateTimestamp': time,
+          'validateToken': '257209a1531f4d15bdfecd0f96ad6dd0',
+          'validateValue': __WEBPACK_IMPORTED_MODULE_2_md5___default()(__WEBPACK_IMPORTED_MODULE_2_md5___default()((random + time).toString()) + '1a00e77b-38e1-4837-86db-0d04ac88fe51')
+        }
       }, response => {
         if (response.status == 200) {
-          resolve(response.data);
+          resolve(response);
         } else {
           reject(response);
         }

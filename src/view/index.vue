@@ -113,12 +113,6 @@ import { getList } from '../api/http.js'
       var platform = weex.config.env.platform
       if(platform ==='android'){
         valueModel.getOpenId(function(v){
-          modal.alert({
-         message: v.cookie,
-         duration: 3
-       }, function (value) {
-         console.log('alert callback', value)
-       })
           that.listQuery=v;
           let firstData = {
             kOpenId: that.listQuery.openId,
@@ -131,7 +125,7 @@ import { getList } from '../api/http.js'
 
      }else{
        let firstData = {
-         kOpenId: 'r7509511504149365138806060',
+         kOpenId: 'r1291681504597762371279858',
          startTime: start,
          endTime: end,
        }
@@ -182,14 +176,46 @@ import { getList } from '../api/http.js'
       },
       getCount(param,info){
         getList(param,info).then(res=>{
-          if(res.status ===200){
+          modal.alert({
+         message:res,
+         duration: 3
+       }, function (value) {
+         console.log('alert callback', value)
+       })
+          if(res.status ===200&&res.data){
             this.load = false
             this.full = false
             this.info = res.data
+          }else{
+            this.load = false
+            this.full = false
+            this.info = {
+      "doorstepSend": {
+        "grabed": 0,
+        "waitMail": 0,
+        "cancelled": 0
+    },
+    "waybill": {
+      "waitSigned": 0,
+      "signed": 0,
+      "signException": 0,
+      "waitPickup": 0
+    },
+    "siteSend": {
+      "grabed": 0,
+      "cancelled": 0
+    }
+}
           }
         }).catch(err=>{
           this.load = false
           this.full = false
+          modal.alert({
+         message: err+'1',
+         duration: 3
+       }, function (value) {
+         console.log('alert callback', value)
+       })
         })
       }
     }
