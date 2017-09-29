@@ -114,7 +114,7 @@ import { getList } from '../api/http.js'
       if(platform ==='android'){
         valueModel.getOpenId(function(v){
           modal.alert({
-         message: v,
+         message: v.cookie,
          duration: 3
        }, function (value) {
          console.log('alert callback', value)
