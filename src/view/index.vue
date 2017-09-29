@@ -105,20 +105,27 @@ import { getList } from '../api/http.js'
         info: undefined,
         load: false,
         full: false,
-        kOpenId: undefined
+        kOpenId: undefined,
+        listQuery: undefined
     },
     created(){
       var that= this;
       var platform = weex.config.env.platform
       if(platform ==='android'){
         valueModel.getOpenId(function(v){
-          that.kOpenId=v.openId;
+          modal.alert({
+         message: v,
+         duration: 3
+       }, function (value) {
+         console.log('alert callback', value)
+       })
+          that.listQuery=v;
           let firstData = {
-            kOpenId: that.kOpenId,
+            kOpenId: that.listQuery.openId,
             startTime: start,
             endTime: end,
           }
-         that.getCount(firstData)
+         that.getCount(firstData,that.listQuery)
        });
      }else if(platform==='iOS'){
 
@@ -128,7 +135,7 @@ import { getList } from '../api/http.js'
          startTime: start,
          endTime: end,
        }
-      that.getCount(firstData)
+      that.getCount(firstData,that.listQuery)
      }
     },
     methods: {
@@ -139,42 +146,42 @@ import { getList } from '../api/http.js'
         switch (e){
           case 1:
           let dataFirst = {
-            kOpenId: this.kOpenId,
+            kOpenId: this.listQuery.openId,
             startTime: start,
             endTime: end
           }
-         this.getCount(dataFirst)
+         this.getCount(dataFirst,this.listQuery)
           break;
           case 2:
           let data1 = {
-            kOpenId: this.kOpenId,
+            kOpenId: this.listQuery.openId,
             startTime: start-24*60*60*1000,
             endTime: end-24*60*60*1000
           }
-          this.getCount(data1)
+          this.getCount(data1,this.listQuery)
           break;
           case 3:
           let day = new Date().getDay()
           let data2 = {
-            kOpenId: this.kOpenId,
+            kOpenId: this.listQuery.openId,
             startTime: start-24*60*60*1000*day,
             endTime: end
           }
-          this.getCount(data2)
+          this.getCount(data2,this.listQuery)
           break;
           case 4:
           let day1 = new Date().getDate()
           let data3 = {
-            kOpenId: this.kOpenId,
+            kOpenId: this.listQuery.openId,
             startTime: start-24*60*60*1000*day1,
             endTime: end
           }
-          this.getCount(data3)
+          this.getCount(data3,this.listQuery)
           break;
         }
       },
-      getCount(param){
-        getList(param).then(res=>{
+      getCount(param,info){
+        getList(param,info).then(res=>{
           if(res.status ===200){
             this.load = false
             this.full = false
