@@ -176,12 +176,6 @@ import { getList } from '../api/http.js'
       },
       getCount(param,info){
         getList(param,info).then(res=>{
-          modal.alert({
-         message:res,
-         duration: 3
-       }, function (value) {
-         console.log('alert callback', value)
-       })
           if(res.status ===200&&res.data){
             this.load = false
             this.full = false
@@ -210,12 +204,6 @@ import { getList } from '../api/http.js'
         }).catch(err=>{
           this.load = false
           this.full = false
-          modal.alert({
-         message: err+'1',
-         duration: 3
-       }, function (value) {
-         console.log('alert callback', value)
-       })
         })
       }
     }

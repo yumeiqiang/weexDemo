@@ -562,12 +562,6 @@ const end = new Date().setHours(23, 59, 59);
     },
     getCount(param, info) {
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__api_http_js__["a" /* getList */])(param, info).then(res => {
-        modal.alert({
-          message: res,
-          duration: 3
-        }, function (value) {
-          console.log('alert callback', value);
-        });
         if (res.status === 200 && res.data) {
           this.load = false;
           this.full = false;
@@ -596,12 +590,6 @@ const end = new Date().setHours(23, 59, 59);
       }).catch(err => {
         this.load = false;
         this.full = false;
-        modal.alert({
-          message: err + '1',
-          duration: 3
-        }, function (value) {
-          console.log('alert callback', value);
-        });
       });
     }
   }
@@ -611,8 +599,8 @@ const end = new Date().setHours(23, 59, 59);
 /* 5 */
 /***/ (function(module, exports) {
 
-// const API = 'https://t.keguanchina.xyz/'  // 测试地址
-const API = 'https://on.keguanchina.xyz/'; // 正式地址
+const API = 'https://t.keguanchina.xyz/'; // 测试地址
+// const API = 'https://on.keguanchina.xyz/'    // 正式地址
 
 module.exports = {
     API
@@ -677,7 +665,7 @@ function fetch(path, all) {
         }
       }, response => {
         if (response.status == 200) {
-          resolve(response);
+          resolve(response.data);
         } else {
           reject(response);
         }

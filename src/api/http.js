@@ -46,7 +46,7 @@ export function fetch (path,all) {
           },
         }, (response) => {
           if (response.status == 200) {
-            resolve(response)
+            resolve(response.data)
           }
           else {
             reject(response)
