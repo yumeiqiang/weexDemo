@@ -455,7 +455,6 @@ const end = new Date().setHours(23, 59, 59);
     info: undefined,
     load: false,
     full: false,
-    kOpenId: undefined,
     listQuery: undefined
   },
   created() {
@@ -524,34 +523,23 @@ const end = new Date().setHours(23, 59, 59);
     },
     getCount(param, info) {
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__api_http_js__["a" /* getList */])(param, info).then(res => {
-        if (res.status === 200 && res.data) {
+        if (res.status === 200) {
           this.load = false;
           this.full = false;
           this.info = res.data;
         } else {
-          this.load = false;
-          this.full = false;
-          this.info = {
-            "doorstepSend": {
-              "grabed": 0,
-              "waitMail": 0,
-              "cancelled": 0
-            },
-            "waybill": {
-              "waitSigned": 0,
-              "signed": 0,
-              "signException": 0,
-              "waitPickup": 0
-            },
-            "siteSend": {
-              "grabed": 0,
-              "cancelled": 0
-            }
-          };
+          modal.alert({
+            message: res.msg,
+            duration: 0.3
+          }, function (value) {});
         }
       }).catch(err => {
         this.load = false;
         this.full = false;
+        modal.alert({
+          message: err.msg,
+          duration: 0.3
+        }, function (value) {});
       });
     }
   }
@@ -871,8 +859,8 @@ module.exports.render._withStripped = true
 /* 6 */
 /***/ (function(module, exports) {
 
-const API = 'https://t.keguanchina.xyz/'; // 测试地址
-// const API = 'https://on.keguanchina.xyz/'    // 正式地址
+// const API = 'https://t.keguanchina.xyz/'  // 测试地址
+const API = 'https://on.keguanchina.xyz/'; // 正式地址
 
 module.exports = {
     API

@@ -105,7 +105,6 @@ import { getList } from '../api/http.js'
         info: undefined,
         load: false,
         full: false,
-        kOpenId: undefined,
         listQuery: undefined,
     },
     created(){
@@ -176,34 +175,25 @@ import { getList } from '../api/http.js'
       },
       getCount(param,info){
         getList(param,info).then(res=>{
-          if(res.status ===200&&res.data){
+          if(res.status ===200){
             this.load = false
             this.full = false
             this.info = res.data
           }else{
-            this.load = false
-            this.full = false
-            this.info = {
-      "doorstepSend": {
-        "grabed": 0,
-        "waitMail": 0,
-        "cancelled": 0
-    },
-    "waybill": {
-      "waitSigned": 0,
-      "signed": 0,
-      "signException": 0,
-      "waitPickup": 0
-    },
-    "siteSend": {
-      "grabed": 0,
-      "cancelled": 0
-    }
-}
+            modal.alert({
+            message: res.msg,
+            duration: 0.3
+          }, function (value) {
+          })
           }
         }).catch(err=>{
           this.load = false
           this.full = false
+          modal.alert({
+          message: err.msg,
+          duration: 0.3
+        }, function (value) {
+        })
         })
       }
     }
