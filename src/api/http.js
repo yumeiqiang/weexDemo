@@ -7,6 +7,7 @@ import qs from 'qs'
 export function fetch (path,all) {
   const random = randomNum()
   const time = new Date().getTime()
+  var platform = weex.config.env.platform
   if(platform==='android'){
       return new Promise((resolve, reject) => {
           stream.fetch({

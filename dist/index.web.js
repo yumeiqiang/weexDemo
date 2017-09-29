@@ -615,6 +615,7 @@ const stream = weex.requireModule('stream');
 function fetch(path, all) {
   const random = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_js__["a" /* randomNum */])();
   const time = new Date().getTime();
+  var platform = weex.config.env.platform;
   if (platform === 'android') {
     return new Promise((resolve, reject) => {
       stream.fetch({

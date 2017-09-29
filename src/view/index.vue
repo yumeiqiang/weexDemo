@@ -106,7 +106,7 @@ import { getList } from '../api/http.js'
         load: false,
         full: false,
         kOpenId: undefined,
-        listQuery: undefined
+        listQuery: undefined,
     },
     created(){
       var that= this;
